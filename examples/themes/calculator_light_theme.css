@@ -1,17 +1,24 @@
 
 .calculator {
+    background-color: red;
+    flex-grow: 1.0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1.0;
     background-color: #363636;
 }
 
+
 .display {
-    child-left: 1s;
-    font-size: 60.0;
+    text-justify: end;
+    font-size: 70.0;
     color: #FFFFFF;
     background-color: #363636;
-    child-right: 10px;
-    child-top: 1s;
-    child-bottom: 1s;
+    padding-right: 10px;
+    flex-grow: 1.0;
 }
 
 .display:focus {
@@ -21,18 +28,34 @@
 
 
 button {
-    child-space: 1s;
-    font-size: 40.0;
+    text-justify: center;
+    font-size: 50.0;
     color: white;
 }
 
-button:focus {
-    border-color:yellow;
-    border-width: 1px;
+button.row {
+    margin-bottom: 1px;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1.0;
+}
+
+button.last_row {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1.0;
 }
 
 button.digit {
+    margin-right: 1px;
     background-color: #adadad;
+    flex-grow: 1.0;
+}
+
+
+button.digit:focus {
+    border-color:yellow;
+    border-width: 1px;
 }
 
 button.digit:hover {
@@ -44,7 +67,14 @@ button.digit:active {
 }
 
 button.operator {
+    /* margin-right: 1px; */
     background-color: #ff7b00;
+    flex-grow: 1.0;
+}
+
+button.operator:focus {
+    border-color:yellow;
+    border-width: 1px;
 }
 
 button.operator:hover {

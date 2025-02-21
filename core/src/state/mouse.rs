@@ -1,6 +1,5 @@
-use crate::Entity;
+use crate::entity::Entity;
 
-/// A mouse button.
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum MouseButton {
     Left,
@@ -9,15 +8,12 @@ pub enum MouseButton {
     Other(u16),
 }
 
-/// The state of a mouse button.
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum MouseButtonState {
     Pressed,
     Released,
 }
 
-// Todo - replace with bitmask
-/// The current state of the modifier keys.
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub struct ModifiersState {
     pub shift: bool,
@@ -37,7 +33,6 @@ impl Default for ModifiersState {
     }
 }
 
-/// Data which describes the current state of a mouse button.
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub struct MouseButtonData {
     pub state: MouseButtonState,
@@ -59,7 +54,6 @@ impl Default for MouseButtonData {
     }
 }
 
-/// The current state of the mouse cursor and buttons.
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub struct MouseState {
     pub cursorx: f32,

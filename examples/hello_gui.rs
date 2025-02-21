@@ -1,17 +1,24 @@
-use tuix::*;
-use tuix::widgets::*;
-fn main() {
+extern crate tuix;
 
-    let app = Application::new(WindowDescription::new().with_title("Hello GUI"), |state, window| {
-        
-        Button::with_label("Button")
-            .build(state, window.entity(), |builder| {
-                builder
-                    .set_width(Pixels(100.0))
-                    .set_height(Pixels(30.0))
-                    .set_background_color(Color::from("#ff5e1a"))
-                    .set_child_space(Stretch(1.0))
-            });
+use tuix::widgets::Button;
+use tuix::Application;
+
+use tuix::events::BuildHandler;
+
+use tuix::PropSet;
+
+use tuix::style::themes::DEFAULT_THEME;
+
+fn main() {
+    let app = Application::new(|win_desc, state, window| {
+
+        state.insert_theme(DEFAULT_THEME);
+
+        Button::new().build(state, window, |builder| {
+            builder.set_text("Button")
+        });
+
+        win_desc.with_title("Hello GUI")
     });
 
     app.run();

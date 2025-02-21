@@ -1,23 +1,17 @@
 [package]
 name = "tuix_core"
-version = "0.2.0"
+version = "0.1.0"
 authors = ["George Atkinson"]
-license = "MIT"
+license = "MIT/Apache-2.0"
 repository = "https://github.com/geom3trik/tuix"
 edition = "2018"
-description = "Core parts of tuix"
-
-[features]
-rounding = ["morphorm/rounding"]
 
 [dependencies]
+gl = "0.14.0"
+glutin = "0.26"
 cssparser = "0.27.2"
-femtovg = "0.2.5"
-keyboard-types = { version = "0.5.0", default-features = false }
-bitflags = "1.2.1"
+femtovg = { git = "https://github.com/femtovg/femtovg", branch = "master", default-features = false }
+image = "0.23.12"
+bimap = "0.5.3"
+keyboard-types = { version = "0.5", default-features = false }
 fnv = "1.0.7"
-num-traits = "0.2.14"
-# tts = "0.17.3"
-# image = { version = "0.23.6"}
-# morphorm = "0.2.0"
-morphorm = {git = "https://github.com/geom3trik/morphorm", branch = "main"}

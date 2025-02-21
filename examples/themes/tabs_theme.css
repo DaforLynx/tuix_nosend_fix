@@ -1,116 +1,48 @@
 
 
-tab_manager {
-    width: 1s;
+tab_container {
+    background-color: red;
+    width: 300px;
+    height: 500px;
 }
 
 tab_bar {
     background-color: #202020;
-    height: 30px;
-    layout-type: row;
 }
 
-tab_bar>.tab {
+tab_bar>button {
     background-color: #2e2e2e;
-    right: 1px;
-    bottom: 1px;
-    width: 100px;
-    child-space: 1s;
-}
-
-tab_bar>.tab:checked {
-    bottom: 0px;
-    background-color: #383838;
     /* background-color: red; */
+    margin-right: 1px;
+    margin-bottom: 1px;
+    flex-basis: 80px;
+    text-justify: center;
 }
 
-/* Styles for a vertical tab bar */
-
-tab_manager.vertical {
-    layout-type: row;
-}
-
-tab_manager.vertical tab_bar {
-    flex-basis: 100px;
-    layout-type: column;
-}
-
-tab_manager.vertical tab_bar>.tab {
-    height: 30px;
-}
-
-tab_manager.vertical tab_bar>.tab:checked {
-    bottom: 1px;
-    right: 0px;
-}
-
-
-.first {
-    flex-grow: 1.0;
-    align-items: center;
-}
-
-.second {
-    flex-grow: 1.0;
-    align-items: center;
-}
-
-tab_manager>.viewport {
+tab_bar>button:checked {
+    margin-bottom: 0px;
     background-color: #383838;
-    flex-grow: 1.0;
+}
+
+.item1 {
+    background-color: #9b5959;
+    height: 100%;
+    width: 100%;
+}
+
+.item2 {
+    background-color: #47995b;
+    height: 100%;
+    width: 100%;
+}
+
+tab_container>.container {
+    background-color: #555555;
+    height: 100%;
 }
 
 .test {
-    width: 200px;
+    width: 100px;
     height: 30px;
-    background-color: #646464;
-    border-radius: 3px;
-    child-space: 1s;
-    space: 10px;
-}
-
-dropdown {
-    background-color: #383838;
-    height: 30px;
-    color: black;
-    border-width: 1px;
-    border-color: black;
-    border-radius: 3;
-    text-justify: center;
-}
-
-dropdown label {
-    color: black;
-    text-justify: center;
-}
-
-dropdown .icon {
-    text-justify: center;
-    color: #ff5e1a;
-    width: 30px;
-}
-
-dropdown>.container {
-    top: 100%;
-    width: 100%;
-    margin-top: 5px;
-    background-color: white;
-    border-color: black;
-    border-width: 1px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 128);
-}
-
-dropdown>.container .item {
-    height: 30px;
-    color: black;
-    padding-left: 10px;
-    background-color: white;
-    transition: background-color 0.1 0.0;
-}
-
-dropdown>.container .item:hover {
-    height: 30px;
-    color: white;
-    background-color: #ff5e1a;
-    transition: background-color 0.1 0.0;
+    background-color: green;
 }
