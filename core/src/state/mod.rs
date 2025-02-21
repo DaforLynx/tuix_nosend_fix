@@ -110,9 +110,7 @@ impl State {
         Builder::new(self, entity)
     }
 
-    
     pub fn insert_stylesheet(&mut self, path: &str) -> Result<(), std::io::Error> {
-
         let style_string = std::fs::read_to_string(path.clone())?;
         self.resource_manager.stylesheets.push(path.to_owned());
 
@@ -131,17 +129,16 @@ impl State {
     }
 
     // Removes all style data and then reloads the stylesheets
-    // TODO change the error type to allow for parsing errors 
+    // TODO change the error type to allow for parsing errors
     pub fn reload_styles(&mut self) -> Result<(), std::io::Error> {
-
         if self.resource_manager.themes.is_empty() && self.resource_manager.stylesheets.is_empty() {
-            return Ok(())
+            return Ok(());
         }
 
         // Remove all non-inline style data
         self.style.background_color.remove_styles();
         self.style.font_color.remove_styles();
-        
+
         // Position
         self.style.left.remove_styles();
         self.style.right.remove_styles();
@@ -198,7 +195,6 @@ impl State {
         for stylesheet in self.resource_manager.stylesheets.iter() {
             let theme = std::fs::read_to_string(stylesheet)?;
             overall_theme += &theme;
-            
         }
 
         self.style.parse_theme(&overall_theme);
@@ -217,7 +213,6 @@ impl State {
 
         self.event_queue.push_back(event);
     }
-
 
     pub fn id2entity(&self, id: &str) -> Option<Entity> {
         self.style.ids.get_by_left(&id.to_string()).cloned()
@@ -293,7 +288,9 @@ impl State {
     // }
 
     pub fn apply_animations(&mut self) -> bool {
-        self.style.background_color.animate(std::time::Instant::now());
+        self.style
+            .background_color
+            .animate(std::time::Instant::now());
         self.style.font_color.animate(std::time::Instant::now());
         self.style.border_color.animate(std::time::Instant::now());
 
@@ -316,10 +313,18 @@ impl State {
         self.style.padding_right.animate(std::time::Instant::now());
         self.style.padding_top.animate(std::time::Instant::now());
         self.style.padding_bottom.animate(std::time::Instant::now());
-        self.style.border_radius_top_left.animate(std::time::Instant::now());
-        self.style.border_radius_top_right.animate(std::time::Instant::now());
-        self.style.border_radius_bottom_left.animate(std::time::Instant::now());
-        self.style.border_radius_bottom_right.animate(std::time::Instant::now());
+        self.style
+            .border_radius_top_left
+            .animate(std::time::Instant::now());
+        self.style
+            .border_radius_top_right
+            .animate(std::time::Instant::now());
+        self.style
+            .border_radius_bottom_left
+            .animate(std::time::Instant::now());
+        self.style
+            .border_radius_bottom_right
+            .animate(std::time::Instant::now());
         self.style.border_width.animate(std::time::Instant::now());
 
         self.style.background_color.has_animations()

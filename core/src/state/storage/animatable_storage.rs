@@ -223,16 +223,18 @@ where
             self.entity_indices
                 .resize(entity.index() + 1, Default::default());
             // Set the data index to the data position
-            self.entity_indices[entity.index()].data_index =
-                Index::new(self.inline_data.len()).inherited(false).inline(true);
+            self.entity_indices[entity.index()].data_index = Index::new(self.inline_data.len())
+                .inherited(false)
+                .inline(true);
             // Add the data
             self.inline_data.push(value);
         } else {
             let data_index = self.entity_indices[entity.index()].data_index;
 
             if data_index.index() >= self.inline_data.len() {
-                self.entity_indices[entity.index()].data_index =
-                    Index::new(self.inline_data.len()).inherited(false).inline(true);
+                self.entity_indices[entity.index()].data_index = Index::new(self.inline_data.len())
+                    .inherited(false)
+                    .inline(true);
                 //self.entity_indices[entity.index()].animation_index = AnimationIndex::default();
                 self.inline_data.push(value);
             } else {
@@ -295,8 +297,6 @@ where
             self.entity_indices[entity.index()].animation_id = self.active_animations.len();
             self.active_animations.push(animation);
         }
-
-
     }
 
     pub fn animate(&mut self, current_time: std::time::Instant) {
@@ -354,7 +354,8 @@ where
 
         // Remove inactive animation states from active animations list
         // Retains persistent animations
-        self.active_animations.retain(|e| e.t0 < 1.0 || e.persistent);
+        self.active_animations
+            .retain(|e| e.t0 < 1.0 || e.persistent);
 
         for state in inactive.into_iter() {
             for entity in state.entities.iter() {
@@ -425,7 +426,7 @@ where
         let rule_animation_id = self.rule_indices[rule].animation_id;
 
         // Check if the entity is already animating with a transition
-        
+
         let animation_index = self.entity_indices[entity.index()].animation_id;
         if animation_index < self.active_animations.len() {
             // Check here is the active animation belongs to the transition of the currently linked data
@@ -471,7 +472,6 @@ where
                 self.play_animation(entity, rule_animation_id);
             }
         }
-        
 
         // Link the entity to the same data as the rule
         self.entity_indices[entity.index()].data_index = Index::new(rule_data_index);
@@ -559,7 +559,6 @@ where
         let animation_index = self.entity_indices[entity.index()].animation_id;
 
         if animation_index < self.active_animations.len() {
-            
             return self.active_animations[animation_index].get_output();
         }
 
@@ -571,16 +570,13 @@ where
             }
 
             Some(&self.inline_data[data_index.index()])
-
         } else {
             if data_index.index() >= self.data.len() {
                 return None;
             }
 
-            Some(&self.data[data_index.index()])            
+            Some(&self.data[data_index.index()])
         }
-
-
     }
 
     // Returns true if the entity is linked to a currently active animation
@@ -653,23 +649,21 @@ where
     // // Removes data at data_index
     // pub remove_data(&mut self, data_index: usize) {
     //     // Unlink any entities from the data
-    //     // Remove any 
+    //     // Remove any
     // }
 
     // Removes css styles but leaves inline styles and animations
     pub fn remove_styles(&mut self) {
-
         // Remove rules
         self.rule_indices.clear();
         // Remove rule data
         self.data.clear();
-        
+
         // Unlink non-inline entities from the rules
         for entity in self.entity_indices.iter_mut() {
             if !entity.index().is_inline() {
                 entity.data_index = Index::default();
             }
         }
-    
     }
 }

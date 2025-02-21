@@ -367,10 +367,22 @@ impl<'a> Builder<'a> {
     }
 
     pub fn set_border_radius(mut self, val: Length) -> Self {
-        self.state.style.border_radius_top_left.insert(self.entity, val);
-        self.state.style.border_radius_top_right.insert(self.entity, val);
-        self.state.style.border_radius_bottom_left.insert(self.entity, val);
-        self.state.style.border_radius_bottom_right.insert(self.entity, val);
+        self.state
+            .style
+            .border_radius_top_left
+            .insert(self.entity, val);
+        self.state
+            .style
+            .border_radius_top_right
+            .insert(self.entity, val);
+        self.state
+            .style
+            .border_radius_bottom_left
+            .insert(self.entity, val);
+        self.state
+            .style
+            .border_radius_bottom_right
+            .insert(self.entity, val);
 
         self
     }
@@ -457,7 +469,10 @@ impl<'a> Builder<'a> {
     }
 
     pub fn set_scaley(mut self, scaley: f32) -> Self {
-        self.state.style.scaley.insert(self.entity, Scale::new(scaley));
+        self.state
+            .style
+            .scaley
+            .insert(self.entity, Scale::new(scaley));
 
         self
     }

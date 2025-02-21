@@ -8,8 +8,8 @@ fn main() {
     // Create the app
     let mut app = Application::new(|win_desc, state, window| {
         match state.insert_stylesheet("examples/themes/basic_theme.css") {
-            Ok(_) => {},
-            Err(e) => println!("Error loading stylesheet: {}", e)
+            Ok(_) => {}
+            Err(e) => println!("Error loading stylesheet: {}", e),
         }
 
         let one = Element::new().build(state, window, |builder| builder.class("one"));

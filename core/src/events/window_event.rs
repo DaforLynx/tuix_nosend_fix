@@ -1,4 +1,3 @@
-
 use crate::state::mouse::MouseButton;
 
 use keyboard_types::{Code, Key};

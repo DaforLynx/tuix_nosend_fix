@@ -55,7 +55,6 @@ impl ControlKnob {
     }
 
     pub fn with_log_scale(mut self) -> Self {
-
         self.is_log = true;
 
         self
@@ -142,25 +141,24 @@ impl EventHandler for ControlKnob {
                             };
 
                             let new_val = if self.is_log {
-                                let t = self.temp.log10() + (self.max_value.log10() - self.min_value.log10()) * normalised;
-                                10.0f32.powf((self.temp.log10() + (self.max_value.log10() - self.min_value.log10()) * normalised))
-                                
+                                let t = self.temp.log10()
+                                    + (self.max_value.log10() - self.min_value.log10())
+                                        * normalised;
+                                10.0f32.powf(
+                                    (self.temp.log10()
+                                        + (self.max_value.log10() - self.min_value.log10())
+                                            * normalised),
+                                )
                             } else {
                                 self.temp + (self.max_value - self.min_value) * normalised
                             };
-
-                            
-                                
-
-                            
 
                             self.value = (new_val.min(self.max_value)).max(self.min_value);
 
                             //println!("val: {}", normalised);
 
                             state.insert_event(
-                                Event::new(SliderEvent::ValueChanged(self.value))
-                                    .target(entity),
+                                Event::new(SliderEvent::ValueChanged(self.value)).target(entity),
                             );
 
                             state.insert_event(
@@ -171,7 +169,6 @@ impl EventHandler for ControlKnob {
                 }
 
                 WindowEvent::KeyDown(keycode, _) => {
-                   
                     if *keycode == keyboard_types::Code::ShiftLeft {
                         if !self.shift_pressed {
                             self.shift_pressed = true;
@@ -180,11 +177,9 @@ impl EventHandler for ControlKnob {
                         self.mouse_down_posy = state.mouse.cursory;
                         self.temp = self.value;
                     }
-                    
                 }
 
                 WindowEvent::KeyUp(keycode, _) => {
-                    
                     if *keycode == keyboard_types::Code::ShiftLeft {
                         if self.shift_pressed {
                             self.shift_pressed = false;
@@ -193,7 +188,6 @@ impl EventHandler for ControlKnob {
                         self.mouse_down_posy = state.mouse.cursory;
                         self.temp = self.value;
                     }
-                    
                 }
 
                 _ => {}
@@ -203,9 +197,7 @@ impl EventHandler for ControlKnob {
         return false;
     }
 
-    
     fn on_draw(&mut self, state: &mut State, entity: Entity, canvas: &mut Canvas<OpenGl>) {
-
         if state.transform.get_visibility(entity) == Visibility::Invisible {
             return;
         }
@@ -263,20 +255,21 @@ impl EventHandler for ControlKnob {
         let end = PI / 4.0;
 
         let (min, max, value) = if self.is_log {
-            (self.min_value.log10(), self.max_value.log10(), self.value.log10())
+            (
+                self.min_value.log10(),
+                self.max_value.log10(),
+                self.value.log10(),
+            )
             //(self.min_value, self.max_value, self.value)
         } else {
             (self.min_value, self.max_value, self.value)
         };
-
 
         let zero_position = if self.is_log {
             start
         } else {
             (-min / (max - min)) * (end - start) + start
         };
-        
-        
 
         let normalised = (value - min) / (max - min);
 
@@ -294,7 +287,6 @@ impl EventHandler for ControlKnob {
         // let mut paint = Paint::color(back_color);
         // canvas.fill_path(&mut path, paint);
 
-
         let mut path = Path::new();
         path.arc(cx, cy, r1 - 2.5, end, start, Solidity::Solid);
         let mut paint = Paint::color(back_color);
@@ -309,7 +301,7 @@ impl EventHandler for ControlKnob {
             } else {
                 path.arc(cx, cy, r1 - 2.5, zero_position, current, Solidity::Solid);
             }
-            
+
             let mut paint = Paint::color(slider_color);
             paint.set_line_width(5.0);
             paint.set_line_cap(LineCap::Round);
@@ -318,15 +310,15 @@ impl EventHandler for ControlKnob {
 
         // Draw outer arc fill
         //if current != start {
-            //let mut path = Path::new();
-            //path.arc(cx, cy, r0, start, current, Solidity::Hole);
-            //path.arc(cx, cy, r1, current, start, Solidity::Solid);
-            //path.close();
-            // path.arc(cx, cy, r1 - 2.5, end, start, Solidity::Solid);
-            // let mut paint = Paint::color(back_color);
-            // paint.set_line_width(5.0);
-            // paint.set_line_cap(LineCap::Round);
-            // canvas.fill_path(&mut path, paint);
+        //let mut path = Path::new();
+        //path.arc(cx, cy, r0, start, current, Solidity::Hole);
+        //path.arc(cx, cy, r1, current, start, Solidity::Solid);
+        //path.close();
+        // path.arc(cx, cy, r1 - 2.5, end, start, Solidity::Solid);
+        // let mut paint = Paint::color(back_color);
+        // paint.set_line_width(5.0);
+        // paint.set_line_cap(LineCap::Round);
+        // canvas.fill_path(&mut path, paint);
         //}
 
         // Draw knob
@@ -348,5 +340,4 @@ impl EventHandler for ControlKnob {
         canvas.restore();
         canvas.restore();
     }
-    
 }

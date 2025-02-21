@@ -68,7 +68,6 @@ pub struct Style {
     pub rule_selectors: Vec<Vec<Selector>>,
 
     //pub ids: DenseStorage<u64>,
-
     pub ids: BiMap<String, Entity>,
 
     pub elements: DenseStorage<u64>,
@@ -445,16 +444,13 @@ impl Style {
                         self.border_radius_top_right.insert_rule(rule_id, value);
                     }
 
-
                     Property::BorderBottomLeftRadius(value) => {
                         self.border_radius_bottom_left.insert_rule(rule_id, value);
                     }
 
-
                     Property::BorderBottomRightRadius(value) => {
                         self.border_radius_bottom_right.insert_rule(rule_id, value);
                     }
-
 
                     Property::FontSize(value) => {
                         self.font_size.insert_rule(rule_id, value);

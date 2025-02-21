@@ -137,14 +137,11 @@ pub trait PropSet {
 }
 
 impl PropSet for Entity {
-
-    fn class(self, state: &mut State, class_name: &str) -> Self
-    {
+    fn class(self, state: &mut State, class_name: &str) -> Self {
         state.style.insert_class(self, class_name);
 
         self
     }
-
 
     fn get_parent(self, state: &mut State) -> Option<Entity> {
         self.parent(&state.hierarchy)
@@ -672,7 +669,6 @@ impl PropSet for Entity {
     }
 
     fn set_font_size(self, state: &mut State, value: f32) -> Self {
-
         state.style.font_size.insert(self, value);
 
         state.insert_event(

@@ -571,7 +571,6 @@ fn parse_transition2<'i, 't>(
 
                     match input.next()? {
                         Token::Number { value: x, .. } => {
-
                             transition.delay = *x;
                         }
 

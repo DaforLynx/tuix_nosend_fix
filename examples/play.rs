@@ -1,7 +1,3 @@
-
-
-
-
 extern crate tuix;
 
 use tuix::widgets::Button;
@@ -13,7 +9,6 @@ use tuix::*;
 
 fn main() {
     let app = Application::new(|win_desc, state, window| {
-
         //state.insert_theme(DEFAULT_THEME);
         state.insert_stylesheet("examples/themes/play_theme.css");
 
@@ -24,13 +19,9 @@ fn main() {
 
         let row2 = HBox::new().build(state, window, |builder| builder);
 
-        Button::new().build(state, row2, |builder| {
-            builder.set_text("Play")
-        });
+        Button::new().build(state, row2, |builder| builder.set_text("Play"));
 
-        Button::new().build(state, row2, |builder| {
-            builder.set_text("Stop")
-        });
+        Button::new().build(state, row2, |builder| builder.set_text("Stop"));
 
         win_desc.with_title("DAW").with_inner_size(300, 120)
     });

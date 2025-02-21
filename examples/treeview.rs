@@ -3,7 +3,7 @@ extern crate tuix;
 use tuix::*;
 
 use tuix::widgets::{
-    Button, Checkbox, Dimension, Dropdown, Spinner, Panel, RadioBox, RadioList, ScrollContainer,
+    Button, Checkbox, Dimension, Dropdown, Panel, RadioBox, RadioList, ScrollContainer, Spinner,
     Textbox, VectorEdit, VectorEditEvent,
 };
 
@@ -112,7 +112,6 @@ impl EventHandler for ResizableVBox {
                                 < state.transform.get_posx(entity)
                                     + state.transform.get_width(entity)
                         {
-
                             //if self.hovering == false {
                             //    self.hovering = true;
                             //println!("Change Cursor");

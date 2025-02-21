@@ -15,7 +15,7 @@ use crate::state::mouse::MouseButton;
 
 use crate::layout::{Align, Justify};
 
-use crate::widgets::{Element, Button, Textbox, TextboxEvent};
+use crate::widgets::{Button, Element, Textbox, TextboxEvent};
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum SpinnerEvent {
@@ -72,9 +72,11 @@ impl BuildHandler for Spinner {
         self.textbox = Textbox::new(&self.value.to_string())
             .build(state, entity, |builder| builder.set_flex_grow(1.0));
 
-
         let arrow_container = Element::new().build(state, entity, |builder| {
-            builder.set_width(Length::Pixels(19.0)).set_flex_grow(0.0).class("arrow_container")
+            builder
+                .set_width(Length::Pixels(19.0))
+                .set_flex_grow(0.0)
+                .class("arrow_container")
         });
 
         self.increment = Element::new()
@@ -165,7 +167,6 @@ impl EventHandler for Spinner {
             match window_event {
                 WindowEvent::MouseDown(button) => {
                     if *button == MouseButton::Left {
-                    
                         if event.target == self.increment {
                             self.value += self.inc_value;
 
@@ -192,10 +193,9 @@ impl EventHandler for Spinner {
                     }
                 }
 
-                _=> {}
+                _ => {}
             }
         }
-        
 
         if let Some(textbox_event) = event.message.downcast::<TextboxEvent>() {
             match textbox_event {

@@ -82,8 +82,6 @@ pub trait EventHandler {
             _ => &0.0,
         };
 
-
-
         let background_color = state
             .style
             .background_color
@@ -119,25 +117,49 @@ pub trait EventHandler {
 
         let parent_width = state.transform.get_width(parent);
 
-        let border_radius_top_left = match state.style.border_radius_top_left.get(entity).cloned().unwrap_or_default() {
+        let border_radius_top_left = match state
+            .style
+            .border_radius_top_left
+            .get(entity)
+            .cloned()
+            .unwrap_or_default()
+        {
             Length::Pixels(val) => val,
             Length::Percentage(val) => parent_width * val,
             _ => 0.0,
         };
 
-        let border_radius_top_right = match state.style.border_radius_top_right.get(entity).cloned().unwrap_or_default() {
+        let border_radius_top_right = match state
+            .style
+            .border_radius_top_right
+            .get(entity)
+            .cloned()
+            .unwrap_or_default()
+        {
             Length::Pixels(val) => val,
             Length::Percentage(val) => parent_width * val,
             _ => 0.0,
         };
 
-        let border_radius_bottom_left = match state.style.border_radius_bottom_left.get(entity).cloned().unwrap_or_default() {
+        let border_radius_bottom_left = match state
+            .style
+            .border_radius_bottom_left
+            .get(entity)
+            .cloned()
+            .unwrap_or_default()
+        {
             Length::Pixels(val) => val,
             Length::Percentage(val) => parent_width * val,
             _ => 0.0,
         };
 
-        let border_radius_bottom_right = match state.style.border_radius_bottom_right.get(entity).cloned().unwrap_or_default() {
+        let border_radius_bottom_right = match state
+            .style
+            .border_radius_bottom_right
+            .get(entity)
+            .cloned()
+            .unwrap_or_default()
+        {
             Length::Pixels(val) => val,
             Length::Percentage(val) => parent_width * val,
             _ => 0.0,
@@ -159,20 +181,20 @@ pub trait EventHandler {
             .border_width
             .get(entity)
             .cloned()
-            .unwrap_or_default() 
+            .unwrap_or_default()
         {
             Length::Pixels(val) => val,
             Length::Percentage(val) => parent_width * val,
             _ => 0.0,
         };
-        
+
         // Skip widgets with no width or no height
-        if width + 2.0* border_width + padding_left + padding_right == 0.0 || height + 2.0 * border_width + padding_top + padding_bottom == 0.0 {
+        if width + 2.0 * border_width + padding_left + padding_right == 0.0
+            || height + 2.0 * border_width + padding_top + padding_bottom == 0.0
+        {
             return;
         }
 
-        
-        
         // Apply transformations
         let rotate = state.style.rotate.get(entity).unwrap_or(&0.0);
         let scaley = state.style.scaley.get(entity).cloned().unwrap_or_default();
@@ -188,7 +210,6 @@ pub trait EventHandler {
         // canvas.scale(1.0, scaley.0);
         // canvas.translate(-pt.0, -pt.1);
 
-
         // Apply Scissor
         let clip_entity = state.transform.get_clip_widget(entity);
 
@@ -199,8 +220,6 @@ pub trait EventHandler {
 
         canvas.scissor(clip_posx, clip_posy, clip_width, clip_height);
 
-
-        
         let shadow_h_offset = state
             .style
             .shadow_h_offset
@@ -233,7 +252,6 @@ pub trait EventHandler {
         let mut paint = Paint::color(border_color);
         paint.set_line_width(border_width);
         canvas.stroke_path(&mut path, &paint);
-
 
         // Draw text
         if let Some(text) = state.style.text.get_mut(entity) {

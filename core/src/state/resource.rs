@@ -11,8 +11,8 @@ pub struct Image {
 
 pub struct ResourceManager {
     //pub images: HashMap<String, Image>,
-    pub stylesheets: Vec<String>,   // Stylesheets refer to a fiel path
-    pub themes: Vec<String>,    // Themes are the string content stylesheets
+    pub stylesheets: Vec<String>, // Stylesheets refer to a fiel path
+    pub themes: Vec<String>,      // Themes are the string content stylesheets
 }
 
 impl ResourceManager {
@@ -25,7 +25,7 @@ impl ResourceManager {
     }
 
     // pub fn add_stylesheet(&mut self, path: String) -> Result<(), std::io::Error> {
-        
+
     //     let style_string = std::fs::read_to_string(path.clone())?;
     //     self.stylesheets.push(path);
 

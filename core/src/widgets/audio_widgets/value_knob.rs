@@ -41,9 +41,9 @@ impl std::fmt::Display for FreqValue {
         } else if self.0.abs() >= 100.0 && self.0.abs() < 1000.0 {
             write!(f, "{:.0}", self.0)
         } else if self.0.abs() >= 1000.0 && self.0.abs() < 10000.0 {
-            write!(f, "{:.2}", self.0/1000.0)
+            write!(f, "{:.2}", self.0 / 1000.0)
         } else if self.0.abs() >= 10000.0 && self.0.abs() < 100000.0 {
-            write!(f, "{:.1}", self.0/1000.0)
+            write!(f, "{:.1}", self.0 / 1000.0)
         } else {
             write!(f, "{}", self.0)
         }
@@ -94,22 +94,19 @@ impl ValueKnob {
 impl BuildHandler for ValueKnob {
     type Ret = Entity;
     fn on_build(&mut self, state: &mut State, entity: Entity) -> Self::Ret {
-
         let label = Label::new(&self.label).build(state, entity, |builder| {
             builder
                 .set_height(Length::Pixels(25.0))
                 .set_text_justify(Justify::Center)
         });
         if self.is_log {
-            self.slider = ControlKnob::new(self.init, self.min_value, self.max_value).with_log_scale().build(
-                state,
-                entity,
-                |builder| {
+            self.slider = ControlKnob::new(self.init, self.min_value, self.max_value)
+                .with_log_scale()
+                .build(state, entity, |builder| {
                     builder
                         .set_width(Length::Pixels(50.0))
                         .set_height(Length::Pixels(50.0))
-                },
-            );
+                });
         } else {
             self.slider = ControlKnob::new(self.init, self.min_value, self.max_value).build(
                 state,
@@ -121,10 +118,9 @@ impl BuildHandler for ValueKnob {
                 },
             );
         }
-        
 
         //let val_str = format!("{:3}!", self.init);
-        let freq_val: FreqValue = self.init.into(); 
+        let freq_val: FreqValue = self.init.into();
         self.value = Textbox::new(&freq_val.to_string()).build(state, entity, |builder| {
             builder
                 .set_height(Length::Pixels(25.0))
@@ -172,7 +168,6 @@ impl EventHandler for ValueKnob {
                                 .target(self.slider)
                                 .propagate(Propagation::Direct),
                         );
-
                     }
                 }
 

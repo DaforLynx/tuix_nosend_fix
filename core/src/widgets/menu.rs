@@ -306,7 +306,6 @@ impl EventHandler for Menu {
                             return true;
                         }
                     } else if event.origin.is_descendant_of(&state.hierarchy, entity) {
-
                         //if event.target != self.container {
                         // state.insert_event(
                         //     Event::new(WindowEvent::MouseOver)

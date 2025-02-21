@@ -45,7 +45,6 @@ impl EventManager {
     // }
 
     pub fn flush_events(&mut self, state: &mut State) -> bool {
-
         //println!("FLUSH");
         let mut needs_redraw = false;
 
@@ -71,7 +70,7 @@ impl EventManager {
         // Loop over the events in the event manager queue
         'events: for event in self.event_queue.iter_mut() {
             //println!("Event: {:?}", event);
-            
+
             if let Some(window_event) = event.message.downcast::<WindowEvent>() {
                 match window_event {
                     WindowEvent::Redraw => {
@@ -102,11 +101,9 @@ impl EventManager {
                         }
                     },
                     */
-
                     _ => {}
                 }
             }
-            
 
             let target = event.target;
 
@@ -195,19 +192,22 @@ impl EventManager {
         // TODO: Move this to the window widget
         let dpi_factor = 1.0;
 
-        if (self.prev_width != width || self.prev_height != height || self.prev_dpi_factor != dpi_factor) {
+        if (self.prev_width != width
+            || self.prev_height != height
+            || self.prev_dpi_factor != dpi_factor)
+        {
             canvas.set_size(width as u32, height as u32, dpi_factor as f32);
         }
-        
-        let background_color: femtovg::Color = state.style.background_color.get(state.root).cloned().unwrap_or_default().into();
 
-        canvas.clear_rect(
-            0,
-            0,
-            width as u32,
-            height as u32,
-            background_color,
-        );
+        let background_color: femtovg::Color = state
+            .style
+            .background_color
+            .get(state.root)
+            .cloned()
+            .unwrap_or_default()
+            .into();
+
+        canvas.clear_rect(0, 0, width as u32, height as u32, background_color);
 
         canvas.reset();
 
